@@ -5,4 +5,7 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface StockRepository : MongoRepository<Stock,String> {
+
+    fun existsStockByIsin(isin: String) : Boolean
+
 }

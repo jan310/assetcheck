@@ -8,8 +8,7 @@ data class Stock(
     @Id
     val id: String?,
     val isin: String,
-    val name: String,
-    val pros: List<Pro>,
-    val cons: List<Contra>,
-    val review: String?
+    val companyName: String,
+    val points: List<Point>, //  list of pros and cons
+    val review: String? // optional final statement, maybe a buy/sell advise
 )
