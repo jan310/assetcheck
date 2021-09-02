@@ -2,24 +2,31 @@ package com.ondra.assetcheck
 
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 class AssetController(private val assetService: AssetService) {
 
     @PostMapping("postNewStock")
-    fun addStock(@RequestBody newStock: Stock) : ResponseEntity<Void> {
+    fun addStock(@RequestBody newStock: Stock): ResponseEntity<Void> {
         return if (assetService.saveNewStock(newStock)) ResponseEntity.status(HttpStatus.CREATED).build()
         else ResponseEntity.status(HttpStatus.CONFLICT).build()
     }
 
-    @PostMapping("postNewPoint/{isin}")
-    fun addPoint(@PathVariable isin: String, @RequestBody newPoint: Point) : ResponseEntity<Void> {
-        return if (assetService.saveNewPoint(isin, newPoint)) ResponseEntity.status(HttpStatus.CREATED).build()
+    @PostMapping("postNewPoint/{id}")
+    fun addPoint(@PathVariable id: String, @RequestBody newPoint: Point): ResponseEntity<Void> {
+        return if (assetService.saveNewPoint(id, newPoint)) ResponseEntity.status(HttpStatus.CREATED).build()
         else ResponseEntity.status(HttpStatus.CONFLICT).build()
+    }
+
+    @GetMapping("getAllStocks")
+    fun getAllStocks(): ResponseEntity<List<Stock>> = ResponseEntity.status(HttpStatus.OK).body(assetService.getAllStocks())
+
+    @GetMapping("getStock/{id}")
+    fun getStock(@PathVariable id: String): ResponseEntity<Stock> {
+        val stock = assetService.getStock(id)
+        return if (stock != null) ResponseEntity.status(HttpStatus.OK).body(stock)
+        else ResponseEntity.status(HttpStatus.NOT_FOUND).build()
     }
 
 }
