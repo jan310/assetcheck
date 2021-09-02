@@ -8,4 +8,6 @@ interface StockRepository : MongoRepository<Stock,String> {
 
     fun existsStockByIsin(isin: String) : Boolean
 
+    fun findStockByIsin(isin: String): Stock
+
 }

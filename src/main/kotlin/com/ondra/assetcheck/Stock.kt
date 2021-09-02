@@ -9,6 +9,6 @@ data class Stock(
     val id: String?,
     val isin: String,
     val companyName: String,
-    val points: List<Point>, //  list of pros and cons
-    val review: String? // optional final statement, maybe a buy/sell advise
+    val points: MutableList<Point>, //  list of pros and cons
+    val review: String? // optional final statement, maybe a buy/sell recommendation
 )
