@@ -29,4 +29,18 @@ class AssetController(private val assetService: AssetService) {
         else ResponseEntity.status(HttpStatus.NOT_FOUND).build()
     }
 
+    @PatchMapping("updateCompanyName/{id}")
+    fun updateCompanyName(@PathVariable id: String, @RequestBody companyName: CompanyName): ResponseEntity<Void> {
+        return if (assetService.updateCompanyName(id, companyName.companyName)) ResponseEntity.status(HttpStatus.NO_CONTENT).build()
+        else ResponseEntity.status(HttpStatus.CONFLICT).build()
+    }
+    data class CompanyName (val companyName: String)
+
+    @PatchMapping("updateCompanyReview/{id}")
+    fun updateCompanyReview(@PathVariable id: String, @RequestBody companyReview: CompanyReview): ResponseEntity<Void> {
+        return if (assetService.updateCompanyReview(id, companyReview.companyReview)) ResponseEntity.status(HttpStatus.NO_CONTENT).build()
+        else ResponseEntity.status(HttpStatus.CONFLICT).build()
+    }
+    data class CompanyReview (val companyReview: String)
+
 }
