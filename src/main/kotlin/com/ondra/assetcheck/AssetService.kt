@@ -17,10 +17,10 @@ class AssetService(private val stockRepository: StockRepository) {
         }
     }
 
-    fun saveNewPoint(id: String, newPoint: Point): Boolean {
-        return if (newPoint.text.length > characterLimit || !stockRepository.existsStockById(id)) false
+    fun saveNewPoint(stockId: String, newPoint: Point): Boolean {
+        return if (newPoint.text.length > characterLimit || !(1 .. 3).contains(newPoint.priority) || !stockRepository.existsStockById(stockId)) false
         else {
-            val stock = stockRepository.findStockById(id).copy(updated = LocalDateTime.now())
+            val stock = stockRepository.findStockById(stockId).copy(updated = LocalDateTime.now())
             stock.points.add(newPoint)
             stockRepository.save(stock)
             true
@@ -48,6 +48,24 @@ class AssetService(private val stockRepository: StockRepository) {
             stockRepository.save(stockRepository.findStockById(id).copy(review = companyReview, updated = LocalDateTime.now()))
             true
         }
+    }
+
+    fun updatePoint(stockId: String, point: Point): Boolean {
+        if (point.text.length > characterLimit ||
+            !(1 .. 3).contains(point.priority) ||
+            !stockRepository.existsStockById(stockId))
+            return false
+
+        val stock = stockRepository.findStockById(stockId).copy(updated = LocalDateTime.now())
+        for (i in stock.points.indices) {
+            if (stock.points[i].id == point.id) {
+                stock.points[i] = point
+                stockRepository.save(stock)
+                return true
+            }
+        }
+
+        return false
     }
 
 }

@@ -13,9 +13,9 @@ class AssetController(private val assetService: AssetService) {
         else ResponseEntity.status(HttpStatus.CONFLICT).build()
     }
 
-    @PostMapping("postNewPoint/{id}")
-    fun addPoint(@PathVariable id: String, @RequestBody newPoint: Point): ResponseEntity<Void> {
-        return if (assetService.saveNewPoint(id, newPoint)) ResponseEntity.status(HttpStatus.CREATED).build()
+    @PostMapping("postNewPoint/{stockId}")
+    fun addPoint(@PathVariable stockId: String, @RequestBody newPoint: Point): ResponseEntity<Void> {
+        return if (assetService.saveNewPoint(stockId, newPoint)) ResponseEntity.status(HttpStatus.CREATED).build()
         else ResponseEntity.status(HttpStatus.CONFLICT).build()
     }
 
@@ -42,5 +42,14 @@ class AssetController(private val assetService: AssetService) {
         else ResponseEntity.status(HttpStatus.CONFLICT).build()
     }
     data class CompanyReview (val companyReview: String)
+
+    @PatchMapping("updatePoint/{stockId}")
+    fun updatePoint(@PathVariable stockId: String, @RequestBody point: Point): ResponseEntity<Void> {
+        return if (assetService.updatePoint(stockId, point)) ResponseEntity.status(HttpStatus.NO_CONTENT).build()
+        else ResponseEntity.status(HttpStatus.CONFLICT).build()
+    }
+
+    // deleteStock
+    // deletePoint
 
 }
