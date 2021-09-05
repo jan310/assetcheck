@@ -49,7 +49,16 @@ class AssetController(private val assetService: AssetService) {
         else ResponseEntity.status(HttpStatus.CONFLICT).build()
     }
 
-    // deleteStock
-    // deletePoint
+    @DeleteMapping("deleteStock/{stockId}")
+    fun deleteStock(@PathVariable stockId: String): ResponseEntity<Void> {
+        return if (assetService.deleteStock(stockId)) ResponseEntity.status(HttpStatus.ACCEPTED).build()
+        else ResponseEntity.status(HttpStatus.NOT_FOUND).build()
+    }
+
+    @DeleteMapping("deletePoint/{stockId}/{pointId}")
+    fun deletePoint(@PathVariable stockId: String, @PathVariable pointId: String): ResponseEntity<Void> {
+        return if (assetService.deletePoint(stockId, pointId)) ResponseEntity.status(HttpStatus.ACCEPTED).build()
+        else ResponseEntity.status(HttpStatus.NOT_FOUND).build()
+    }
 
 }

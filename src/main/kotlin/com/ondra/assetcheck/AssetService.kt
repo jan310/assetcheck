@@ -68,4 +68,27 @@ class AssetService(private val stockRepository: StockRepository) {
         return false
     }
 
+    fun deleteStock(stockId: String): Boolean {
+        return if (!stockRepository.existsStockById(stockId)) false
+        else {
+            stockRepository.deleteById(stockId)
+            true
+        }
+    }
+
+    fun deletePoint(stockId: String, pointId: String): Boolean {
+        if (!stockRepository.existsStockById(stockId)) return false
+
+        val stock = stockRepository.findStockById(stockId).copy(updated = LocalDateTime.now())
+        for (i in stock.points.indices) {
+            if (stock.points[i].id == pointId) {
+                stock.points.removeAt(i)
+                stockRepository.save(stock)
+                return true
+            }
+        }
+
+        return false
+    }
+
 }
