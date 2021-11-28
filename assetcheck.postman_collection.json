@@ -1,0 +1,224 @@
+{
+	"info": {
+		"_postman_id": "43983631-6c99-40fa-8129-33b822a21b67",
+		"name": "assetcheck",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "postNewStock",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"CNE100000296\",\r\n    \"companyName\": \"BYD\",\r\n    \"points\": [\r\n        {\r\n            \"positive\": true,\r\n            \"priority\": 3,\r\n            \"text\": \"von der CCP gerne gesehen\"\r\n        },\r\n        {\r\n            \"positive\": true,\r\n            \"priority\": 3,\r\n            \"text\": \"in Hongkong und Shenzhen gelistet -> kein delisting risiko\"\r\n        }\r\n    ],\r\n    \"review\": \"Buy\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/postNewStock",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"postNewStock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "postNewPoint",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"positive\": false,\r\n    \"priority\": 2,\r\n    \"text\": \"sehr starke Konkurrenz\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/postNewPoint/CNE100000296",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"postNewPoint",
+						"CNE100000296"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllStocks",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/getAllStocks",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"getAllStocks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getStockByID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/getStock/CNE100000296",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"getStock",
+						"CNE100000296"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateCompanyReview",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"companyReview\": \"Sell\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/updateCompanyReview/CNE100000296",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"updateCompanyReview",
+						"CNE100000296"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateCompanyName",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"companyName\": \"Build Your Dreams\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/updateCompanyName/CNE100000296",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"updateCompanyName",
+						"CNE100000296"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updatePoint",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"6fd02b7f-87a4-42a7-976a-515ec3d9d69f\",\r\n    \"positive\": true,\r\n    \"priority\": 3,\r\n    \"text\": \"blablabla\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/updatePoint/CNE100000296",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"updatePoint",
+						"CNE100000296"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteStock",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/deleteStock/CNE100000296",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"deleteStock",
+						"CNE100000296"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deletePoint",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/deletePoint/CNE100000296/77be4fe8-c0df-49aa-8eaf-5a1dd897803d",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"deletePoint",
+						"CNE100000296",
+						"77be4fe8-c0df-49aa-8eaf-5a1dd897803d"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
